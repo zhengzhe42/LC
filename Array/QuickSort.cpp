@@ -75,3 +75,42 @@ int main()
     return 0;
 }
 
+/*******************************************************/
+
+// My first Quick Sort
+#include <iostream>
+#include <array>
+using namespace std;
+void swap(int* a, int* b){
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+void printArray(int arr[], int size){
+    for(int i=0; i<size; i++) cout << arr[i] << " ";
+    cout << endl;
+}
+int partition(int arr[], int l, int r){
+    int t = arr[r];
+    int i = l;
+    for(int j=l; j<r; j++){
+        if(arr[j] <= t) swap(&arr[i++], &arr[j]);
+    }
+    swap(&arr[i], &arr[r]);
+    return i;
+}
+void quickSort(int arr[], int l, int r){
+    if( l>=r ) return;
+    int p = partition(arr, l, r);
+    quickSort(arr, l, p-1);
+    quickSort(arr, p+1, r);
+}
+int main(){
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    printArray(arr, size);
+    quickSort(arr, 0, size-1);
+    printArray(arr, size);
+    return 0;
+}
+
