@@ -66,3 +66,50 @@ int main()
     cout << "After HeapSort: ";
     printArray(arr, n);
 }
+
+
+
+
+// Java - https://www.jiuzhang.com/qa/2261/
+public class Solution {
+    /**
+     * @param A an integer array
+     * @return void
+     */
+    public void sortIntegers2(int[] A) {
+        // Write your code here
+        int n = A.length;
+        heapify(A, n);
+        for (int i = n - 1; i > 0; i--){
+            swap(A, 0, i);
+            n--;
+            heapify(A, n);
+        }
+    }
+    private void heapify(int[] A, int length){
+        for (int i = length / 2; i >= 0; i--){
+            sink(A, i, length);
+        }
+    }
+    private void sink(int[] A, int k, int length){
+      while (k < length){
+        int largest = k;
+        if (2 * k + 1 < length && A[2 * k + 1] > A[largest]){
+            largest = 2 * k + 1;
+        }
+        if (2 * k + 2 < length && A[2 * k + 2] > A[largest]){
+            largest = 2 * k + 2;
+        }
+        if (k == largest){
+            break;
+        }
+        swap(A, k, largest);
+        k = largest;
+      }
+    }
+    private void swap(int[] A, int x, int y){
+        int temp = A[x];
+        A[x] = A[y];
+        A[y] = temp;
+    }
+}
